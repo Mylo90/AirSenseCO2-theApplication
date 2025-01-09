@@ -265,16 +265,22 @@ class BluetoothScanner(private val context: Context) {
             when (characteristic.uuid) {
                 co2CharacteristicUuid -> {
                     co2Regex.find(data)?.groups?.get(1)?.value?.toFloatOrNull()?.let {
-                        val positiveValue = kotlin.math.abs(it)
-                        Log.d("BluetoothScanner", "Konverterad CO2-data: $positiveValue")
-                        _co2Data.value = positiveValue
+                        // only for testing
+                        //val positiveValue = kotlin.math.abs(it)
+                        //Log.d("BluetoothScanner", "Konverterad CO2-data: $positiveValue")
+                        //_co2Data.value = positiveValue
+                         _co2Data.value = it
+                        Log.d("BluetoothScanner", "Uppdaterad CO2-data: $it")
                     } ?: Log.e("BluetoothScanner", "Misslyckades att matcha CO2-data")
                 }
                 tempCharacteristicUuid -> {
                     tempRegex.find(data)?.groups?.get(1)?.value?.toFloatOrNull()?.let {
-                        val positiveValue = kotlin.math.abs(it)
-                        Log.d("BluetoothScanner", "Konverterad Temp-data: $positiveValue")
-                        _tempData.value = positiveValue
+                        // only for testing
+                        //val positiveValue = kotlin.math.abs(it)
+                        //Log.d("BluetoothScanner", "Konverterad Temp-data: $positiveValue")
+                        //_tempData.value = positiveValue
+                        _tempData.value = it
+                        Log.d("BluetoothScanner", "Uppdaterad Temp-data: $it")
                     } ?: Log.e("BluetoothScanner", "Misslyckades att tolka temperatur")
                 }
                 else -> {
